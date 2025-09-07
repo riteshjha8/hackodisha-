@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InternHub - Super Massive Frontend</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <i class="fa-solid fa-code"></i> InternHub
+      </div>
+      <nav>
+        <ul>
+          <li class="active" data-view="dashboard"><span class="icon"><i class="fa-solid fa-house"></i></span> Dashboard</li>
+          <li data-view="interns"><span class="icon"><i class="fa-solid fa-users"></i></span> Interns</li>
+          <li data-view="projects"><span class="icon"><i class="fa-solid fa-diagram-project"></i></span> Projects</li>
+          <li data-view="analytics"><span class="icon"><i class="fa-solid fa-chart-line"></i></span> Analytics</li>
+          <li data-view="settings"><span class="icon"><i class="fa-solid fa-gear"></i></span> Settings</li>
+        </ul>
+      </nav>
+      <div class="meta">
+        <div class="mini">v2.1</div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Topbar -->
+      <div class="topbar">
+        <button id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="search-container">
+          <input type="text" placeholder="Search interns, projects..."/>
+        </div>
+        <div class="topbar-actions">
+          <div class="notifications">
+            <i class="fa-solid fa-bell"></i>
+            <span class="count">3</span>
+          </div>
+          <div class="profile-dropdown">
+            <i class="fa-solid fa-circle-user fa-2x"></i>
+            <div class="dropdown-menu">
+              <button class="btn">Profile</button>
+              <button class="btn">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard -->
+      <section id="dashboard" class="view active">
+        <div class="cards-grid">
+          <div class="card">
+            <div class="value">128</div>
+            <div class="small">Active Interns</div>
+          </div>
+          <div class="card">
+            <div class="value">32</div>
+            <div class="small">Projects</div>
+          </div>
+          <div class="card">
+            <div class="value">76%</div>
+            <div class="small">Success Rate</div>
+          </div>
+          <div class="card">
+            <div class="value">15</div>
+            <div class="small">New Hires</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interns -->
+      <section id="interns" class="view">
+        <div class="toolbar">
+          <input type="text" placeholder="Filter interns..."/>
+          <button>Add Intern</button>
+        </div>
+        <div class="virtual-list"></div>
+        <div class="pagination"></div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="view">
+        <div class="list-cards">
+          <div class="card">
+            <div class="value">Frontend Redesign</div>
+            <div class="small">Ongoing</div>
+          </div>
+          <div class="card">
+            <div class="value">AI Chatbot</div>
+            <div class="small">Planning</div>
+          </div>
+          <div class="card">
+            <div class="value">Mobile App</div>
+            <div class="small">Completed</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analytics -->
+      <section id="analytics" class="view">
+        <div class="cards-grid">
+          <div class="card"><canvas id="internPerformance"></canvas></div>
+          <div class="card"><canvas id="projectStats"></canvas></div>
+          <div class="card"><canvas id="hiringTrends"></canvas></div>
+          <div class="card"><canvas id="roleDistribution"></canvas></div>
+          <div class="card wide"><canvas id="liveActivity"></canvas></div>
+        </div>
+      </section>
+
+      <!-- Settings -->
+      <section id="settings" class="view">
+        <div class="form-card">
+          <label>Company Name</label>
+          <input type="text" placeholder="Enter company name"/>
+          <label>About</label>
+          <textarea placeholder="Write something..."></textarea>
+          <div class="form-actions">
+            <button class="btn ghost">Cancel</button>
+            <button class="btn primary">Save</button>
+          </div>
+        </div>
+        <div class="controls">
+          <span>Dark/Light Mode</span>
+          <div class="switch"><div class="knob"></div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
