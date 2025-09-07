@@ -1,134 +1,185 @@
-
-const state = {
-  interns: [],
-  notifications: 3,
-};
-const notifCount = document.querySelector(".notifications .count");
-
-
-let liveChart;
-
-function renderCharts() {
- 
-  new Chart(document.getElementById("internPerformance"), {
-    type: "line",
-    data: {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-      datasets: [{
-        label: "Performance Score",
-        data: [65, 72, 80, 75, 90, 95],
-        borderColor: "#06b6d4",
-        backgroundColor: "rgba(6,182,212,0.2)",
-        tension: 0.4,
-        fill: true
-      }]
-    },
-    options: { responsive: true, plugins: { legend: { display: false } } }
-  });
-
- 
-  new Chart(document.getElementById("projectStats"), {
-    type: "bar",
-    data: {
-      labels: ["Frontend", "Backend", "AI/ML", "UI/UX"],
-      datasets: [{
-        label: "Projects",
-        data: [12, 9, 5, 6],
-        backgroundColor: ["#06b6d4", "#7c3aed", "#10b981", "#f59e0b"]
-      }]
-    },
-    options: { responsive: true, plugins: { legend: { display: false } } }
-  });
-
- 
-  new Chart(document.getElementById("hiringTrends"), {
-    type: "line",
-    data: {
-      labels: ["2021", "2022", "2023", "2024", "2025"],
-      datasets: [{
-        label: "Hires per Year",
-        data: [15, 28, 34, 48, 55],
-        borderColor: "#7c3aed",
-        backgroundColor: "rgba(124,58,237,0.2)",
-        fill: true,
-        tension: 0.3
-      }]
-    },
-    options: { responsive: true, plugins: { legend: { display: false } } }
-  });
-
-
-  new Chart(document.getElementById("roleDistribution"), {
-    type: "pie",
-    data: {
-      labels: ["Frontend", "Backend", "UI/UX", "AI/ML"],
-      datasets: [{
-        data: [30, 25, 20, 25],
-        backgroundColor: ["#06b6d4", "#7c3aed", "#10b981", "#f59e0b"]
-      }]
-    },
-    options: { responsive: true }
-  });
-
-
-  const ctx = document.getElementById("liveActivity").getContext("2d");
-  liveChart = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: [],
-      datasets: [{
-        label: "Active Interns Online",
-        data: [],
-        borderColor: "#10b981",
-        backgroundColor: "rgba(16,185,129,0.2)",
-        tension: 0.3,
-        fill: true
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: { legend: { display: false } },
-      animation: false,
-      scales: {
-        x: { title: { display: true, text: "Time (HH:MM:SS)" } },
-        y: { title: { display: true, text: "Interns" }, min: 0, max: 50 }
-      }
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const navLinks = document.querySelectorAll('nav a');
+    const viewSections = document.querySelectorAll('.view-section');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+           
+            navLinks.forEach(l => l.classList.remove('active'));
+            
+           
+            this.classList.add('active');
+          
+          
+            viewSections.forEach(section => section.classList.remove('active'));
+            
+          
+            const viewId = this.getAttribute('data-view');
+            document.getElementById(viewId).classList.add('active');
+        });
+    });
+    
+  
+    const video = document.getElementById('lectureVideo');
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    
+    playBtn.addEventListener('click', function() {
+        video.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    });
+    
+    pauseBtn.addEventListener('click', function() {
+        video.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+    });
+    
+    fullscreenBtn.addEventListener('click', function() {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) {
+            video.msRequestFullscreen();
+        }
+    });
+    
+   
+    const chatMessages = document.getElementById('chatMessages');
+    const messageInput = document.getElementById('messageInput');
+    const sendMessage = document.getElementById('sendMessage');
+    const closeChat = document.querySelector('.close-chat');
+    
+    sendMessage.addEventListener('click', function() {
+        sendChatMessage();
+    });
+    
+    messageInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendChatMessage();
+        }
+    });
+    
+    function sendChatMessage() {
+        const message = messageInput.value.trim();
+        if (message !== '') {
+           
+            addMessageToChat(message, 'user');
+            
+        
+            messageInput.value = '';
+            
+           
+            setTimeout(function() {
+                const aiResponse = generateAIResponse(message);
+                addMessageToChat(aiResponse, 'ai');
+            }, 1000);
+        }
     }
-  });
-
- 
-  setInterval(async () => {
-    const now = new Date().toLocaleTimeString();
-    try {
-      
-      const res = await fetch("https://dummyjson.com/users?limit=1&skip=" + Math.floor(Math.random() * 90));
-      await res.json(); 
-
-     
-      const activeInterns = Math.floor(Math.random() * 50) + 1;
-
-      liveChart.data.labels.push(now);
-      liveChart.data.datasets[0].data.push(activeInterns);
-
-      if (liveChart.data.labels.length > 10) {
-        liveChart.data.labels.shift();
-        liveChart.data.datasets[0].data.shift();
-      }
-      liveChart.update();
-    } catch (err) {
-      console.error("Error fetching data:", err);
+    
+    function addMessageToChat(message, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+        messageDiv.classList.add(sender + '-message');
+        
+        const messageP = document.createElement('p');
+        messageP.textContent = message;
+        
+        messageDiv.appendChild(messageP);
+        chatMessages.appendChild(messageDiv);
+        
+       
+        chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-  }, 2000);
-}
+ 
+ 
+    closeChat.addEventListener('click', function() {
+        document.querySelector('.chat-container').style.display = 'none';
+    });
+    
+    
+    function generateAIResponse(userMessage) {
+        const responses = [
+            "Based on the professor's materials, that concept is explained in chapter 3 of your textbook.",
+            "The professor covered that topic in the last lecture. Would you like me to summarize it for you?",
+            "That's an interesting question. According to the uploaded notes, the answer should be...",
+            "I need to consult the professor's materials to give you an accurate answer. One moment please...",
+            "That concept is further explained in the video at the 15:30 mark. Would you like me to jump to that section?",
+            "Based on the syllabus, we'll cover that in more detail next week.",
+            "The professor provided additional resources on that topic in the resources section."
+        ];
+        
+       
+        if (userMessage.toLowerCase().includes('syllabus')) {
+            return "The syllabus coverage is updated in real-time. Currently, we've completed 65% of the course material.";
+        } else if (userMessage.toLowerCase().includes('attendance')) {
+            return "Current class attendance is at 84%. You've attended 12 out of 14 lectures so far.";
+        } else if (userMessage.toLowerCase().includes('homework') || userMessage.toLowerCase().includes('assignment')) {
+            return "The next assignment is due on Friday. Would you like me to show you the details?";
+        } else if (userMessage.toLowerCase().includes('thank')) {
+            return "You're welcome! Is there anything else I can help with?";
+        }
+       
+       
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+    
+   
+    const voiceCommand = document.querySelector('.voice-command');
+    const voiceStatus = document.querySelector('.voice-status');
+    
+    voiceCommand.addEventListener('click', function() {
+        voiceStatus.classList.toggle('active');
+        
+        if (voiceStatus.classList.contains('active')) {
+            
+            const commands = [
+                "What's the attendance for today's class?",
+                "How many questions were asked?",
+                "What percentage of the syllabus is covered?",
+                "Play the lecture video",
+                "Pause the lecture video"
+            ];
+            
+            
+            setTimeout(function() {
+                voiceStatus.innerHTML = `<p>Heard: "${commands[Math.floor(Math.random() * commands.length)]}"</p>`;
+            }, 1500);
+        }
+    });
+    
 
-
-function init() {
-  if (state.notifications > 0) {
-    notifCount.textContent = state.notifications;
-    notifCount.style.display = "block";
-  } else {
-    notifCount.style.display = "none";
-  }
-  renderCharts();
-}
-init();
+    setTimeout(function() {
+        addMessageToChat("I noticed the professor is discussing neural networks. This is covered in depth in the slides on page 24.", 'ai');
+    }, 2000);
+    
+    
+    const uploadOptions = document.querySelectorAll('.upload-option');
+    uploadOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const type = this.querySelector('h4').textContent;
+            alert(`Upload ${type} functionality would open here. In a real application, this would allow file upload.`);
+        });
+    });
+    
+  
+    const doubtForm = document.querySelector('.doubt-form');
+    const doubtInput = doubtForm.querySelector('input');
+    const doubtButton = doubtForm.querySelector('button');
+    
+    doubtButton.addEventListener('click', function() {
+        const question = doubtInput.value.trim();
+        if (question !== '') {
+            alert(`Question submitted: "${question}". In a real application, this would be sent to the professor.`);
+            doubtInput.value = '';
+        }
+    });
+    
+    doubtInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            doubtButton.click();
+        }
+    });
+});
