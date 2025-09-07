@@ -1,142 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>InternHub - Super Massive Frontend</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyMet - AI Lecture Hosting</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="logo">
-        <i class="fa-solid fa-code"></i> InternHub
-      </div>
-      <nav>
-        <ul>
-          <li class="active" data-view="dashboard"><span class="icon"><i class="fa-solid fa-house"></i></span> Dashboard</li>
-          <li data-view="interns"><span class="icon"><i class="fa-solid fa-users"></i></span> Interns</li>
-          <li data-view="projects"><span class="icon"><i class="fa-solid fa-diagram-project"></i></span> Projects</li>
-          <li data-view="analytics"><span class="icon"><i class="fa-solid fa-chart-line"></i></span> Analytics</li>
-          <li data-view="settings"><span class="icon"><i class="fa-solid fa-gear"></i></span> Settings</li>
-        </ul>
-      </nav>
-      <div class="meta">
-        <div class="mini">v2.1</div>
-      </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Topbar -->
-      <div class="topbar">
-        <button id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
-        <div class="search-container">
-          <input type="text" placeholder="Search interns, projects..."/>
-        </div>
-        <div class="topbar-actions">
-          <div class="notifications">
-            <i class="fa-solid fa-bell"></i>
-            <span class="count">3</span>
-          </div>
-          <div class="profile-dropdown">
-            <i class="fa-solid fa-circle-user fa-2x"></i>
-            <div class="dropdown-menu">
-              <button class="btn">Profile</button>
-              <button class="btn">Logout</button>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h1>MyMet</h1>
             </div>
-          </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" data-view="dashboard-view">Dashboard</a></li>
+                    <li><a href="#" data-view="professor-view">Professor</a></li>
+                    <li><a href="#" data-view="student-view">Student</a></li>
+                    <li><a href="#" data-view="resources-view">Resources</a></li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <span>Prof. Johnson</span>
+                <img src="data:image/svg+xml;base64,
+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJ
+va2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yMCAyMX
+YtMmE0IDQgMCAwIDAtNC00SDhhNCA0IDAgMCAwLTQgNHYyIj48L3BhdGg+PGNpcmNsZSBjeD0iMTIiIGN5PSI3IiByPSI0Ij48L2NpcmNsZT48L3N2Zz4=" 
+alt="Profile">
+            </div>
         </div>
-      </div>
+    </header>
 
-      <!-- Dashboard -->
-      <section id="dashboard" class="view active">
-        <div class="cards-grid">
-          <div class="card">
-            <div class="value">128</div>
-            <div class="small">Active Interns</div>
-          </div>
-          <div class="card">
-            <div class="value">32</div>
-            <div class="small">Projects</div>
-          </div>
-          <div class="card">
-            <div class="value">76%</div>
-            <div class="small">Success Rate</div>
-          </div>
-          <div class="card">
-            <div class="value">15</div>
-            <div class="small">New Hires</div>
-          </div>
-        </div>
-      </section>
+    <main class="container">
+        <!-- Dashboard View -->
+        <section id="dashboard-view" class="view-section active">
+            <div class="dashboard-view">
+                <div class="welcome-section">
+                    <h2>Welcome, Professor Johnson</h2>
+                    <p>Your next AI-hosted lecture is scheduled for tomorrow at 10:00 AM on "Introduction to Artificial Intelligence"</p>
+                </div>
 
-      <!-- Interns -->
-      <section id="interns" class="view">
-        <div class="toolbar">
-          <input type="text" placeholder="Filter interns..."/>
-          <button>Add Intern</button>
-        </div>
-        <div class="virtual-list"></div>
-        <div class="pagination"></div>
-      </section>
+                <div class="content-area">
+                    <div class="lecture-view">
+                        <h3>Current Lecture: Introduction to Artificial Intelligence</h3>
+                        <div class="video-container">                            <iframe width="560" height="315" src="https://www.youtube.com/
+embed/D4nGkWOPb6M?si=PgQ06k6MEE6t7Yh8" title="YouTube 
+video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
+picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <!-- <iframe id="lectureVideo" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
+encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                        </div>
+                        <div class="lecture-controls">
+                            <button id="playBtn"><i class="fas fa-play"></i> Play</button>
+                            <button id="pauseBtn"><i class="fas fa-pause"></i> Pause</button>
+                            <button id="prevBtn"><i class="fas fa-step-backward"></i> Previous</button>
+                            <button id="nextBtn"><i class="fas fa-step-forward"></i> Next</button>
+                            <button id="fullscreenBtn"><i class="fas fa-expand"></i> Fullscreen</button>
+                        </div>
+                    </div>
 
-      <!-- Projects -->
-      <section id="projects" class="view">
-        <div class="list-cards">
-          <div class="card">
-            <div class="value">Frontend Redesign</div>
-            <div class="small">Ongoing</div>
-          </div>
-          <div class="card">
-            <div class="value">AI Chatbot</div>
-            <div class="small">Planning</div>
-          </div>
-          <div class="card">
-            <div class="value">Mobile App</div>
-            <div class="small">Completed</div>
-          </div>
-        </div>
-      </section>
+                    <div class="chat-container">
+                        <div class="chat-header">
+                            <h3><i class="fas fa-robot"></i> AI Assistant (Powered by DeepSeek)</h3>
+                            <span class="close-chat">&times;</span>
+                        </div>
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message ai-message">
+                                <p>Hello! I'm your AI teaching assistant. How can I help you with today's lecture?</p>
+                            </div>
+                            <div class="message ai-message">
+                                <p>I can answer questions about the lecture, explain concepts, and help with doubts.</p>
+                            </div>
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" id="messageInput" placeholder="Ask a question about the lecture...">
+                            <button id="sendMessage"><i class="fas fa-paper-plane"></i> Send</button>
+                        </div>
+                    </div>
+                </div>
 
-      <!-- Analytics -->
-      <section id="analytics" class="view">
-        <div class="cards-grid">
-          <div class="card"><canvas id="internPerformance"></canvas></div>
-          <div class="card"><canvas id="projectStats"></canvas></div>
-          <div class="card"><canvas id="hiringTrends"></canvas></div>
-          <div class="card"><canvas id="roleDistribution"></canvas></div>
-          <div class="card wide"><canvas id="liveActivity"></canvas></div>
-        </div>
-      </section>
+                <div class="stats-section">
+                    <div class="stat-card">
+                        <h4>Attendance</h4>
+                        <p class="stat-value">84%</p>
+                        <p><i class="fas fa-users"></i> 42/50 students</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Questions Answered</h4>
+                        <p class="stat-value">27/32</p>
+                        <p><i class="fas fa-question-circle"></i> 84% resolved by AI</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Syllabus Covered</h4>
+                        <p class="stat-value">65%</p>
+                        <p><i class="fas fa-tasks"></i> 13/20 topics completed</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <!-- Settings -->
-      <section id="settings" class="view">
-        <div class="form-card">
-          <label>Company Name</label>
-          <input type="text" placeholder="Enter company name"/>
-          <label>About</label>
-          <textarea placeholder="Write something..."></textarea>
-          <div class="form-actions">
-            <button class="btn ghost">Cancel</button>
-            <button class="btn primary">Save</button>
-          </div>
-        </div>
-        <div class="controls">
-          <span>Dark/Light Mode</span>
-          <div class="switch"><div class="knob"></div></div>
-        </div>
-      </section>
+        <!-- Professor View -->
+        <section id="professor-view" class="view-section">
+            <div class="professor-view">
+                <h2>Professor Dashboard</h2>
+                <p>Upload your lecture materials and manage your AI-assisted classes</p>
+                
+                <div class="upload-section">
+                    <h3>Upload Lecture Materials</h3>
+                    <div class="upload-options">
+                        <div class="upload-option">
+                            <i class="fas fa-file-powerpoint"></i>
+                            <h4>Slides</h4>
+                            <p>Upload presentation slides</p>
+                        </div>
+                        <div class="upload-option">
+                            <i class="fas fa-sticky-note"></i>
+                            <h4>Notes</h4>
+                            <p>Upload lecture notes</p>
+                        </div>
+                        <div class="upload-option">
+                            <i class="fas fa-video"></i>
+                            <h4>Video</h4>
+                            <p>Upload lecture video</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="upload-section">
+                    <h3>Recent Uploads</h3>
+                    <div class="stats-section">
+                        <div class="stat-card">
+                            <h4>Slides</h4>
+                            <p class="stat-value">12</p>
+                            <p>PowerPoint files</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Notes</h4>
+                            <p class="stat-value">8</p>
+                            <p>PDF documents</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Videos</h4>
+                            <p class="stat-value">5</p>
+                            <p>Lecture recordings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Student View -->
+        <section id="student-view" class="view-section">
+            <div class="student-view">
+                <h2>Student Dashboard</h2>
+                <p>Access lecture materials and ask questions</p>
+                
+                <div class="doubt-section">
+                    <h3>Ask a Question</h3>
+                    <div class="doubt-form">
+                        <input type="text" placeholder="What would you like to ask?">
+                        <button>Submit Question</button>
+                    </div>
+                </div>
+                
+                <div class="upload-section">
+                    <h3>Recent Lectures</h3>
+                    <div class="stats-section">
+                        <div class="stat-card">
+                            <h4>Viewed</h4>
+                            <p class="stat-value">15</p>
+                            <p>Lectures watched</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Questions</h4>
+                            <p class="stat-value">8</p>
+                            <p>Asked this month</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Progress</h4>
+                            <p class="stat-value">78%</p>
+                            <p>Course completion</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources View -->
+        <section id="resources-view" class="view-section">
+            <div class="professor-view">
+                <h2>Course Resources</h2>
+                <p>Access all learning materials and resources</p>
+                
+                <div class="upload-section">
+                    <h3>Available Resources</h3>
+                    <div class="stats-section">
+                        <div class="stat-card">
+                            <h4>Textbooks</h4>
+                            <p class="stat-value">4</p>
+                            <p>Recommended books</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Articles</h4>
+                            <p class="stat-value">12</p>
+                            <p>Research papers</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Exercises</h4>
+                            <p class="stat-value">7</p>
+                            <p>Practice sets</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-  </div>
 
-  <!-- Toast -->
-  <div class="toast"></div>
+    <!-- Voice Command -->
+    <div class="voice-command">
+        <i class="fas fa-microphone"></i>
+    </div>
+    <div class="voice-status">
+        <p>Listening for voice commands...</p>
+    </div>
 
-  <script src="script.js"></script>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 MyMet - AI Lecture Hosting Platform</p>
+            <p>Transforming education through AI-powered learning</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
